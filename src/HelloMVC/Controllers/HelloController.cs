@@ -10,19 +10,26 @@ namespace HelloMVC.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            string html = "<form method='post'>" +
-                "<input type='text' name='name' />" +
-                "<input type='submit' value='Greet me!' />" +
-                "</form>";
+            string html = @"<form method=""post"">
+                <input type=""text"" name=""name"" />
+                <select name = ""greeting"">
+                <option value = ""Hello"" selected> English </option>
+                <option value = ""Bonjour""> French </option>
+                <option value = ""Hola""> Spanish </option>
+                <option value = ""Zdravo""> Bosnian </option>
+                <option value = ""Kaixo""> Basque </option>
+                </select>
+                <input type=""submit"" value=""Greet me!"" />
+                </form>";
 
             return Content(html, "text/html");
         }
         // /Hello
         [Route("/Hello")]
         [HttpPost]
-        public IActionResult Display(string name = "World")
+        public IActionResult Display(string greeting, string name = "World")
         {
-            return Content(string.Format("<h1>Hello {0}</h1>", name), "text/html");
+            return Content(string.Format("<h1>{0}, {1}</h1>", greeting, name), "text/html");
         }
 
         // Handle request to /Hello/NAME (URL segment)
@@ -43,10 +50,11 @@ namespace HelloMVC.Controllers
         [HttpGet]
         public IActionResult Monkey(string name = "World")
         {
-            string html = "<form method='post'>" +
-                "<input type='text' name='name' />" +
-                "<input type='submit' value='Greet me!' />" +
-                "</form>";
+            string html = @"form method='post'>
+                <input type='text' name='name' />
+                <select name = 'select' >
+                <input type='submit' value='Greet me!' />
+                </form>";
 
             return Redirect("/Hello/Goodbye");
         }
